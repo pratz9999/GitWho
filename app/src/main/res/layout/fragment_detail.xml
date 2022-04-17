@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.gitwho.domain.model.User" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iv_bg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/space"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_space_neon"
+            app:layout_constraintBottom_toTopOf="@id/guideline_bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_profile"
+            profile="@{user.avatarUrl}"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:contentDescription="@string/profile"
+            app:layout_constraintBottom_toBottomOf="@id/iv_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="@{user.login}"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_profile" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="@{user.bio}"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_login" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/white"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/outline_first_page_24"
+            app:fabSize="normal"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toTopOf="@id/guideline_top" />
+
+        <include
+            android:id="@+id/inc_repo"
+            layout="@layout/user_git_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/inc_gist"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_bg"
+            bind:count="@{user.publicRepos}"
+            bind:title="@{`repositories`}" />
+
+        <include
+            android:id="@+id/inc_gist"
+            layout="@layout/user_git_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/inc_follower"
+            app:layout_constraintStart_toEndOf="@id/inc_repo"
+            app:layout_constraintTop_toTopOf="@id/inc_repo"
+            bind:count="@{user.publicGists}"
+            bind:title="@{`gist`}" />
+
+        <include
+            android:id="@+id/inc_follower"
+            layout="@layout/user_git_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@id/inc_following"
+            app:layout_constraintStart_toEndOf="@id/inc_gist"
+            app:layout_constraintTop_toTopOf="@id/inc_gist"
+            bind:count="@{user.followers}"
+            bind:title="@{`followers`}" />
+
+        <include
+            android:id="@+id/inc_following"
+            layout="@layout/user_git_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/inc_follower"
+            app:layout_constraintTop_toTopOf="@id/inc_follower"
+            bind:count="@{user.following}"
+            bind:title="@{`following`}" />
+
+        <include
+            android:id="@+id/inc_name"
+            layout="@layout/user_contact_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@id/inc_repo"
+            bind:drawable="@{@drawable/outline_face_24}"
+            bind:title="@{user.name}" />
+
+        <include
+            android:id="@+id/inc_email"
+            layout="@layout/user_contact_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@id/inc_name"
+            bind:drawable="@{@drawable/outline_email_24}"
+            bind:title="@{user.email}" />
+
+        <include
+            android:id="@+id/inc_twitter"
+            layout="@layout/user_contact_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@id/inc_email"
+            bind:drawable="@{@drawable/ic_twitter}"
+            bind:title="@{user.twitterUsername}" />
+
+        <include
+            android:id="@+id/inc_location"
+            layout="@layout/user_contact_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@id/inc_twitter"
+            bind:drawable="@{@drawable/outline_location_on_24}"
+            bind:title="@{user.location}" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.01" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.29" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.01" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.99" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

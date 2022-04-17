@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GitWho</string>
+    <string name="username">Username</string>
+    <string name="label_search_msg">Why don\'t you search for the brightest mind?</string>
+    <string name="space">space</string>
+    <string name="profile">profile</string>
+</resources>
