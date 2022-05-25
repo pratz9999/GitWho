@@ -15,7 +15,7 @@
         <item name="android:editTextColor">@color/black</item>
     </style>
     <style name="Theme.GitWhoSplash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/black</item>
+        <item name="windowSplashScreenBackground">@color/white</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_app</item>
         <item name="postSplashScreenTheme">@style/Theme.GitWho</item>
     </style>
